@@ -1,8 +1,3 @@
-1\. unconditional lr
-================
-Sean Maguire
-07/03/2021
-
 # Unconditional logistic regression
 
 ``` r
