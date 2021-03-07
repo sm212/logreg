@@ -3,8 +3,8 @@ title: "1. unconditional lr"
 author: "Sean Maguire"
 date: "07/03/2021"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 
 # Unconditional logistic regression
@@ -40,24 +40,23 @@ $$
 
 The left hand side has a direct interpretation as the *risk of* $D$ *given* $X_i^{t= 0}$. If you have 2 different sets of covariates $X_i$, $\tilde{X_i}$ then you can calculate all the normal risk related things people are usually interested in:
 
-$$
-\begin{eqnarray}
-\text{Risk ratio} &=& \frac{P(D \vert X_i)}{P(D \vert \tilde{X_i})} \\ \\
+
+\begin{eqnarray*}
+\text{Risk ratio} &=& \frac{P(D \vert X_i)}{P(D \vert \tilde{X_i})} \\
 \text{Attributable risk} &=& P(D \vert X_i) - P(D \vert \tilde{X_i})
-\end{eqnarray}
-$$
+\end{eqnarray*}
+
 
 ### Interpretation of model coefficients for cohort studies
 
 When the data comes from a cohort study, model coefficients can be interpreted as risk ratios. To see this take $X_i = (X_1, X_2, ..., X_n)$ and $\tilde{X_i} = (X_1 + 1, X_2, ..., X_n)$ and stick them into the model:
 
-$$
-\begin{eqnarray}
+\begin{eqnarray*}
 \frac{P(D \vert X_i)}{P(D \vert \tilde{X_i})} &=& \frac{f(X_i)}{f(\tilde(X_i))} \\
 &=& \exp{[-\beta_1X_i - \dots - \beta_nX_n] - \exp{[-\beta_1(X_i + 1) - \dots - \beta_nX_n]}} \\
 &=& \exp{[\beta_1]}
-\end{eqnarray}
-$$
+\end{eqnarray*}
+
 Or, taking logs:
 
 $$
@@ -98,30 +97,30 @@ That last point needs talking about! The assumption you need to make is called t
 
 The risks of developing the disease given no $X_j$, $P(D = 1 \vert X_j = 0)$, and with $X_j$, $P(D = 1 \vert X_j = 1)$ are given by
 
-$$
-\begin{eqnarray}
-P(D = 1 \vert X_j = 0) &=& \frac{c}{c + d} \\ \\
+
+\begin{eqnarray*}
+P(D = 1 \vert X_j = 0) &=& \frac{c}{c + d} \\
 P(D = 1 \vert X_j = 1) &=& \frac{a}{a + b}
-\end{eqnarray}
-$$
+\end{eqnarray*}
+
 
 And the odds are
 
-$$
-\begin{eqnarray}
-\text{Odds}(D = 1 \vert X_j = 0) &=& \frac{c}{d} \\ \\
+
+\begin{eqnarray*}
+\text{Odds}(D = 1 \vert X_j = 0) &=& \frac{c}{d} \\
 \text{Odds}(D = 1 \vert X_j = 1) &=& \frac{a}{b}
-\end{eqnarray}
-$$
+\end{eqnarray*}
+
 
 Which gives risk ratios & odds ratios of
 
-$$
-\begin{eqnarray}
-\text{Risk ratio} &=& \frac{\frac{a}{a + b}}{\frac{c}{c + d}} = \frac{a(c + d)}{c(a + b)} \\\\
+
+\begin{eqnarray*}
+\text{Risk ratio} &=& \frac{\frac{a}{a + b}}{\frac{c}{c + d}} = \frac{a(c + d)}{c(a + b)} \\
 \text{Odds ratio} &=& \frac{\frac{a}{b}}{\frac{c}{d}} = \frac{ad}{bc}
-\end{eqnarray}
-$$
+\end{eqnarray*}
+
 
 If the disease is rare then the $D = 1$ numbers will be significantly smaller than the $D = 0$ numbers, so $a + b \approx b$ and $c + d \approx d$. Putting this into the formula for the risk ratio gives
 
