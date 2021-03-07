@@ -1,0 +1,37 @@
+---
+title: "1. unconditional lr"
+author: "Sean Maguire"
+date: "07/03/2021"
+output: html_document
+---
+
+# Unconditional logistic regression
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = T, warning = F, message = F)
+```
+
+```{r}
+library(readr)
+library(ggplot2)
+
+evans = read_csv('./data/evans.csv')
+```
+
+# Some theory
+
+At a very high level, here's how all of modeling works. First of all you get some data (either from experiments or observational data) which contains info on an *outcome variable of interest*, $D$, and info on *other factors which may influence the outcome* $X_i$. Then you want to estimate the probability of the outcome, given the factors $P(D \vert X_i)$. All what modeling does is write down some mathematical model for the probability:
+
+$$
+P(D | X_i) = f(X_i)
+$$
+
+Logistic regression is when $f(X_i) = \exp{(-\beta_iX_i)}$. That's the right hand side sorted, what about the left hand? The left hand depends on the data structure, and there's 2 very important situations to look at:
+
+## Cohort studies
+
+This is the situation logistic regression was made for. The idea of a cohort study is to get a bunch of people, measure all the $X_i$ at the start of the study (lets write it at $X_i^{t = 0}$), then follow up with them some time later at $t = 1$ to see if they developed the outcome you're trying to measure. In this situation the model is
+
+$$
+P(D^{t = 1} \vert X_i^{t= 0}) = f(X_i^{t = 0})
+$$
